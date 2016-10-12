@@ -46,7 +46,12 @@ public class VideoActivity extends YouTubeBaseActivity{
             @Override
             public void onInitializationFailure(Provider provider,
                                                 YouTubeInitializationResult youTubeInitializationResult) {
-                
+                if (youTubeInitializationResult.isUserRecoverableError()) {
+                    youTubeInitializationResult.getErrorDialog(this, RECOVERY_REQUEST).show();
+                } else {
+                    String error = "Error initializing YouTube player";
+                    Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+                }
             }
         };
 
